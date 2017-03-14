@@ -1,3 +1,4 @@
+<%@ page import="com.domain.gantt.GanttTasks" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <filterpane:filterPane domain="com.domain.gantt.GanttTasks" dialog="true"
                        associatedProperties="users.username"
                        filterPropertyValues="${['root':
-                                                        [values: com.domain.gantt.GanttTasks.executeQuery('select t.text from GanttTasks t where t.type=\'project\' ')]]}"/>
+                                                        [values: GanttTasks.executeQuery('select t.text from GanttTasks t where t.type=\'project\' ')]]}"/>
 <a href="#list-ganttTasks" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
                                                                  default="Skip to content&hellip;"/></a>
 
