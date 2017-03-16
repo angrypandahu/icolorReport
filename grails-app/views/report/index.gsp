@@ -38,11 +38,11 @@
     </g:if>
     <g:if test="${user.reportGroup.name == 'GROUP_ICOLOR'}">
         <f:table collection="${reportList}"
-                 properties="['id', 'user', 'content', 'question', 'share', 'reportDate', 'isSend']"/>
+                 properties="['id', 'user', 'content', 'question', 'share', 'reportDate', 'isSend','dateCreated']"/>
     </g:if>
     <g:if test="${user.reportGroup.name == 'GROUP_WAIBAO'}">
         <f:table collection="${reportList}"
-                 properties="['id', 'user', 'content', 'workHours', 'reportDate', 'isSend']"/>
+                 properties="['id', 'user', 'content', 'workHours', 'reportDate', 'isSend','dateCreated']"/>
     </g:if>
 
     <div class="pagination">
