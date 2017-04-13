@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession
 class WxController {
 
     final String WX_LOGIN_URL = "https://api.weixin.qq.com/sns/jscode2session";
-    final String APP_ID = "wxf8a227ca709fc491";
-    final String SECRET = "1e11f6ec0d8e8acd783e34b74081bfb7";
+    final String APP_ID = "wxb5b560b6880f1919";
+    final String SECRET = "a4ff6aa465fd52d5790002e6bc58245f";
     def authenticationManager
     def userDetailsService
 
