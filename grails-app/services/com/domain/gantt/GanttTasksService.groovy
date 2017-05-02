@@ -68,8 +68,8 @@ class GanttTasksService {
     def importTask(String no, String text, String userName, sorter, root) {
         text = no + " " + text;
         def ganttTask = GanttTasks.findByText(text);
-        def start = ReportUtils.dateFormat_5.parse("2017-03-01")
-        def end = ReportUtils.dateFormat_5.parse("2017-04-01")
+        def start = ReportUtils.dateFormat_5.parse("2017-05-10")
+        def end = ReportUtils.dateFormat_5.parse("2017-06-10")
         def split = no.split("\\.")
         def hierarchyType = split.length
         GanttTasks rootTask = GanttTasks.get(root)
@@ -78,7 +78,7 @@ class GanttTasksService {
                 ganttTask = new GanttTasks(text: text, root: rootTask.getText(), sorter: sorter, startDate: start, endDate: end, progress: 0.0, parent: rootTask.getId(), type: 'task');
                 if (hierarchyType > 1) {
                     def parent = no.substring(0, no.lastIndexOf("."))
-                    def parentTask = GanttTasks.findByTextLike("${parent}%");
+                    def parentTask = GanttTasks.findByTextLikeAndRoot("${parent}%",rootTask.getText())
                     if (parentTask) ganttTask?.setParent(parentTask.getId());
                 }
                 ganttTask.save(flush: true);
@@ -94,8 +94,8 @@ class GanttTasksService {
 
     def addTaskToUser(String name, Long taskId) {
         if (name != null && name != "") {
-            if (name.contains("/")) {
-                def list = name.split("/");
+            if (name.contains("&")) {
+                def list = name.split("&");
                 list?.each { oneName ->
                     addUser(oneName, taskId)
                 }

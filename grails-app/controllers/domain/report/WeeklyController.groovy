@@ -46,14 +46,14 @@ class WeeklyController {
         return jsonRequest.contains(contentType)
     }
 
-    def filterPaneService
+    def filterPane7Service
     def filter = {
         authReport()
         if (!params.max) params.max = 10
         def user = getAuthenticatedUser();
         render(view: 'index',
-                model: [weeklyList  : filterPaneService.filter(params, Weekly.class),
-                        weeklyCount : filterPaneService.count(params, Weekly.class),
+                model: [weeklyList  : filterPane7Service.filter(params, Weekly.class),
+                        weeklyCount : filterPane7Service.count(params, Weekly.class),
                         user        : user,
                         filterParams: FilterPaneUtils.extractFilterParams(params),
                         params      : params])
@@ -80,7 +80,7 @@ class WeeklyController {
 
         params.f = 'doc'
         params.extension = 'docx'
-        def weeklyList = filterPaneService.filter(params, Weekly.class) as List<Weekly>;
+        def weeklyList = filterPane7Service.filter(params, Weekly.class) as List<Weekly>;
         def weeklyFormatName = ReportUtils.getWeeklyFormatName(weeklyList.get(0));
         def encodeFile = URLEncoder.encode("开发工作周报-${weeklyFormatName}.${params.extension}", "UTF-8")
         response.setHeader("Content-disposition", "attachment; filename=${encodeFile}")

@@ -68,7 +68,7 @@ class ReportController {
         return jsonRequest.contains(contentType)
     }
 
-    def filterPaneService
+    def filterPane7Service
     def filter = {
         authReport()
 
@@ -82,24 +82,24 @@ class ReportController {
             Map labels = ["user.displayName": "User", "reportDate": "ReportDate", "workHours": "WorkHours", "content": "Content", "question": "Question", "share": "Share"]
             Map formatters = [:]
             Map parameters = [content: "Report", "column.widths": [0.1, 0.1, 0.1, 0.3, 0.2, 0.2]]
-            exportService.export(params.f, response.outputStream, filterPaneService.filter(params, Report.class), fields, labels, formatters, parameters)
+            exportService.export(params.f, response.outputStream, filterPane7Service.filter(params, Report.class), fields, labels, formatters, parameters)
             return
         }
         User user = getAuthenticatedUser();
         if (isRetJson()) {
             def retJson = new JSONObject();
-            def filter = filterPaneService.filter(params, Report.class)
+            def filter = filterPane7Service.filter(params, Report.class)
             def array = new JSONArray();
             for (Report report : filter) {
                 array.add(ReportUtils.reportToJson(report))
             }
             retJson.put("reportList", array)
-            retJson.put("reportCount", filterPaneService.count(params, Report.class))
+            retJson.put("reportCount", filterPane7Service.count(params, Report.class))
             render(retJson)
         } else {
             render(view: 'index',
-                    model: [reportList  : filterPaneService.filter(params, Report.class),
-                            reportCount : filterPaneService.count(params, Report.class),
+                    model: [reportList  : filterPane7Service.filter(params, Report.class),
+                            reportCount : filterPane7Service.count(params, Report.class),
                             user        : user,
                             filterParams: FilterPaneUtils.extractFilterParams(params),
                             params      : params])
@@ -172,7 +172,7 @@ class ReportController {
             params.extension = 'docx'
             def encodeFile = URLEncoder.encode("开发工作日报-${year}${month}${day}.${params.extension}", "UTF-8")
             response.setHeader("Content-disposition", "attachment; filename=${encodeFile}")
-            npExportService.export('rtf', response.outputStream, Report, filterPaneService.filter(params, Report.class) as List, fields, labels, formatters, parameters)
+            npExportService.export('rtf', response.outputStream, Report, filterPane7Service.filter(params, Report.class) as List, fields, labels, formatters, parameters)
         } else if (groupName == "GROUP_WAIBAO") {
             params.f = 'excel'
             params.extension = 'xlsx'
@@ -180,7 +180,7 @@ class ReportController {
             def excelName = ReportUtils.getWaiBaoExcelName(Integer.parseInt(year), Integer.parseInt(month) - 1, Integer.parseInt(day), filterOpReportDate);
             def encodeFile = URLEncoder.encode("${excelName}.${params.extension}", "UTF-8")
             response.setHeader("Content-disposition", "attachment; filename=${encodeFile}")
-            npExportService.export('excel', response.outputStream, Report, filterPaneService.filter(params, Report.class) as List, fields, labels, formatters, parameters)
+            npExportService.export('excel', response.outputStream, Report, filterPane7Service.filter(params, Report.class) as List, fields, labels, formatters, parameters)
         }
 
     }
@@ -212,7 +212,7 @@ class ReportController {
 
         def templateFile = grailsResourceLocator.findResourceForURI("classpath:${ReportUtils.REPORT_PATH}${ReportUtils.TEMPLATE_MONTH_MENGTUO}").getFile();
         def stream = new FileInputStream(templateFile);
-        ReportUtils.writeMengTuoMonthReportToExcel(user, filterPaneService.filter(params, Report.class) as List<Report>, response.outputStream, stream);
+        ReportUtils.writeMengTuoMonthReportToExcel(user, filterPane7Service.filter(params, Report.class) as List<Report>, response.outputStream, stream);
     }
 
     @Transactional

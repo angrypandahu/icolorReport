@@ -93,8 +93,8 @@ dataSource:
     jmxExport: true
     driverClassName: com.mysql.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    username: paydb
-    password: hupan12345^
+    username: root
+    password: wxroot
 
 environments:
     development:
@@ -108,7 +108,9 @@ environments:
     production:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://10.66.119.157:3306/report
+            url: jdbc:mysql://localhost:3306/report
+            username: paydb
+            password: root
             properties:
                 jmxEnabled: true
                 initialSize: 5
