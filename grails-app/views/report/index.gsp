@@ -17,16 +17,20 @@
 <div class="nav" role="navigation">
     <ul>
         <li><filterpane:filterButton text="Search"/></li>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label"
-                                                              args="[entityName]"/></g:link></li>
+        %{----}%
+        <li><g:link class="create" action="create" target="_blank"><g:message code="default.new.label"
+                                                                              args="[entityName]"/></g:link></li>
         <sec:access expression="hasRole('ROLE_ADMIN')">
-            <li><g:link class="group" action="createGroupReport" params="${filterParams}"><g:message
-                    code="default.new.label" args="['GroupReport']"/></g:link></li>
+            <li><g:link class="group" action="createGroupReport" params="${filterParams}">
+                <i class="glyphicon glyphicon-download-alt"></i>
+                <g:message
+                        code="default.new.label" args="['GroupReport']"/></g:link></li>
         </sec:access>
         <sec:access expression="hasRole('ROLE_MENGTUO')">
-            <li><g:link class="group" action="createMonthReport" params="${filterParams}"><g:message
-                    code="default.new.label" args="['MonthReport']"/></g:link></li>
+            <li><g:link class="group" action="createMonthReport" params="${filterParams}">
+                <i class="glyphicon glyphicon-download-alt"></i>
+                <g:message
+                        code="default.new.label" args="['MonthReport']"/></g:link></li>
         </sec:access>
     </ul>
 </div>
@@ -38,11 +42,11 @@
     </g:if>
     <g:if test="${user.reportGroup.name == 'GROUP_ICOLOR'}">
         <f:table collection="${reportList}"
-                 properties="['id', 'user', 'content', 'question', 'share', 'reportDate', 'isSend','dateCreated']"/>
+                 properties="['id', 'user', 'content', 'question', 'share', 'reportDate', 'isSend', 'dateCreated']"/>
     </g:if>
     <g:if test="${user.reportGroup.name == 'GROUP_WAIBAO'}">
         <f:table collection="${reportList}"
-                 properties="['id', 'user', 'content', 'workHours', 'reportDate', 'isSend','dateCreated']"/>
+                 properties="['id', 'user', 'content', 'workHours', 'reportDate', 'isSend', 'dateCreated']"/>
     </g:if>
 
     <div class="pagination">

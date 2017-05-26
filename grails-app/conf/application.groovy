@@ -22,6 +22,7 @@ grails.plugin.springsecurity.logout.postOnly = false// allows logout to work
 
 grails.plugin.springsecurity.filterChain.chainMap = [
         [pattern: '/assets/**', filters: 'none'],
+        [pattern: '/**/fonts/**', filters: 'none'],
         [pattern: '/**/js/**', filters: 'none'],
         [pattern: '/**/css/**', filters: 'none'],
         [pattern: '/**/images/**', filters: 'none'],

@@ -82,5 +82,28 @@ class WxController {
         render retJson
     }
 
+    def ajaxLogin() {
+        def retJson = new JSONObject();
+        Authentication authenticationToken = new UsernamePasswordAuthenticationToken(params.username, params.password);
+        try {
+            Authentication result = authenticationManager.authenticate(authenticationToken);
+            HttpSession session = request.getSession();
+            SecurityContextHolder.getContext().setAuthentication(result);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext()); // 这个非常重要，否则验证后将无法登陆
+            def sessionId = session.getId();
+            retJson.put("sessionId", sessionId)
+            retJson.put("user", ReportUtils.userToJson(result.principal))
+            println(retJson)
+            render retJson
+        } catch (Exception e) {
+            def errors = new JSONArray();
+            def error = new JSONObject();
+            error.put("message", e.getMessage())
+            errors.put(error)
+            retJson.put("errors", errors);
+            render(retJson);
+        }
+    }
+
 
 }

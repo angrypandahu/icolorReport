@@ -20,7 +20,7 @@
 <div class="nav" role="navigation">
     <ul>
         <li><filterpane:filterButton text="Search"/></li>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+
         <li><g:link class="create" action="task">Gantt Chart</g:link></li>
         <sec:access expression="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')  ">
             <li><g:link class="create" action="create"><g:message code="default.new.label"
