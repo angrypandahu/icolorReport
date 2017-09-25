@@ -108,18 +108,15 @@ class WeeklyController {
         Weekly weekly = new Weekly(params)
         def thisWeekReports = reportService.getThisWeekReports(user, weekly);
         def content = "";
-        def question = "";
+        def review = "";
         thisWeekReports?.each { report ->
             def getContent = report.getContent()
             if (getContent)
                 content += getContent + "\r\n"
-            def getQuestion = report.getQuestion()
-            if (getQuestion)
-                question += getQuestion + "\r\n"
         }
         weekly.setUser(user)
         weekly.setContent(ReportUtils.get255String(content));
-        weekly.setQuestion(ReportUtils.get255String(question));
+        weekly.setReview(ReportUtils.get255String(review));
         respond weekly
     }
 

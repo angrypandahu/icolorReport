@@ -110,7 +110,7 @@ class ReportUtils {
             map.put('reportDate', getWeeklyFormatName(weekly))
             map.put('user.username', weekly.getUser().getDisplayName())
             map.put('tab.content', weekly.content);
-            map.put('tab.question', StringUtils.defaultIfBlank(weekly.question, ""));
+            map.put('tab.review', StringUtils.defaultIfBlank(weekly.review, ""));
             def schedules = weekly.schedules;
             schedules.each { schedule ->
                 def key = "tab.content.${schedule.dayOfWeek}".toString();

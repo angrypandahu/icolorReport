@@ -53,7 +53,7 @@
                                    value="${weekly.reportDate}"/>
                 </div>
                 <f:field property="content"/>
-                <f:field property="question"/>
+                <f:field property="review"/>
                 <f:field property="isSend"/>
 
             </f:with>
